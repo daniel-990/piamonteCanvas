@@ -1,0 +1,660 @@
+			 *{
+				 margin:0;
+				 padding:0;
+			}
+			
+			body
+		{
+		background-image:url(../retina_wood.png);
+		}
+		
+		#Cont-Piamonte
+		{
+			   width:1200px;
+			   height:575px;
+			   position:relative;
+			   margin:auto;
+			   overflow:hidden;
+			   background-color:#4C85BD;
+			   border-radius:10px;
+			   box-shadow:inset 0px 510px 8px rgba(0,0,0,0.58), inset 0px -8px 8px rgba(0,0,0,0.58);
+			   border:4px solid rgba(95,95,95,1.00);
+		}
+		
+          canvas {
+				background-image:url(../img/img-piamonte/fondo-piamonte2.png);
+                margin-left:1px; 
+                overflow: hidden;
+                position: relative;
+                background-size:7784px 100%;
+				background-position:left center;
+                z-index:3;
+				border:1px solid rgba(95,95,95,1.00);
+				transition:all 0.1s linear;
+                -webkit-transition:all 0.1s linear;
+				}
+				
+           #over{
+                position:absolute;
+				top:120px;
+				display:none;
+				left:300px;
+				width:600px;
+				height:180px;
+				z-index:8;
+				animation:over 2s linear;
+				-webkit-animation:over 2s linear;
+                font-size:180px;
+				text-align:center;
+                color:rgba(197,0,0,1.00);
+				font-family:"YanoneKa";
+				font-weight:500;
+				z-index:5;
+				text-shadow:-8px -8px 0px rgba(161,0,0,1.00);
+				}
+			
+			@-webkit-keyframes zotm
+			{
+				0%
+				{
+					-webkit-transform:scale(1);
+				}
+				
+				50%
+				{
+					-webkit-transform:scale(1.3);
+				}
+				
+				100%
+				{
+					-webkit-transform:scale(1);
+				}
+			}
+			
+			@-webkit-keyframes over
+			{
+				0%
+				{
+					-webkit-transform:translateX(-200px);
+					-webkit-filter:blur(8px);
+				}
+				
+				40%
+				{
+					-webkit-transform:translateX(1300px);
+					-webkit-filter:blur(5px);
+				}
+				
+				
+				100%
+				{
+					-webkit-transform:translateX(0px);
+					-webkit-filter:blur(0px);
+				}
+				
+				
+			}
+			
+			@-webkit-keyframes anipremio
+			{
+				0%
+				{
+					background-image:url(../img/index/Ganaste1.png);
+				}
+				
+				35%
+				{
+					background-image:url(../img/index/Ganaste2.png);
+				}
+				
+				70%
+				{
+					background-image:url(../img/index/Ganaste3.png);
+				}
+				
+				100%
+				{
+					background-image:url(../img/index/Ganaste1.png);
+				}
+			}
+			
+			#score{
+                position: absolute;
+                top: 10px;
+                left:1000px;
+                font-size:40px;
+                color:rgba(255,224,3,1.00);
+				font-family:"YanoneKa";
+				font-weight:500;
+				z-index:5;
+				text-shadow:-3px -3px 0px rgba(209,154,0,1.00);
+            }
+			
+			@font-face
+			{
+			font-family:"YanoneKa";
+			src:url(../YanoneKaffeesatz-Bold.ttf);
+			}
+			
+			@font-face
+			{
+			font-family:"century";
+			src:url(../GOTHIC.ttf);
+			}
+			
+			#rett
+			{
+				width:160px;
+				height:50px;
+				position:absolute;
+				top:350px;
+				left:550px;
+				display:none;
+				box-sizing:border-box;
+				padding-top:4px;
+				padding-left:34px;
+				border-radius:10px;
+				font-size:32px;
+				z-index:10;
+				font-family:"YanoneKa";
+				color:rgba(255,255,255,1.00);
+				background-color:rgba(76,133,189,1.00);
+				cursor:pointer;
+				-webkit-animation:zotm 2s infinite;
+			}
+			
+			#amigar-tangara
+			{
+				width:1200px;
+				height:575px;
+				position:absolute;
+				top:0px;
+				left:0px;
+				overflow:hidden;
+				display:none;
+				z-index:900;
+				background-image:url(../img/index/Tangara-rastrojera.png);
+			}
+			
+			#inf-tangara p
+			{
+				width:700px;
+				text-align:justify;
+				font-size:18px;
+			}
+			
+			#inf-tangara h4
+			{
+				margin-top:10px;
+			}
+			
+			#inf-tangara
+			{
+				width:730px;
+				height:300px;
+				font-family:"century";
+				margin-left:80px;
+				margin-top:80px;
+				overflow:scroll;
+			}
+			
+			#continuar-premio
+				{
+					width:250px;
+					height:50px;
+					background-color:rgba(255,206,0,1.00);
+					color:rgba(132,97,0,1.00);
+					list-style:none;
+					font-size:32px;
+					padding-top:8px;
+					margin-left:440px;
+					margin-top:50px;
+					text-align:center;
+					box-sizing:border-box;
+					cursor:pointer;
+					z-index:10;
+					font-family:"century";
+					border-radius:25px;
+					box-shadow:0px 8px 0px #C6A000, 0px 13px 2px rgba(0,0,0,0.50);
+				}
+				
+				#continuar-premio:active
+				{
+					box-shadow:0px 3px 0px #C6A000;
+					-webkit-transform:translate(0px,6px);
+					transform:translate(0px,6px);
+				}
+			
+				#premio
+				{
+					width:1200px;
+					height:575px;
+					position:absolute;
+					top:0px;
+					left:0px;
+					z-index:990;
+					display:none;
+					background-image:url(../img/index/FondoGanaste.png);
+				}
+				
+				#animacion-premio
+				{
+					width:449px;
+					height:575px;
+					position:absolute;
+					top:0px;
+					left:0px;
+					background-position:center center;
+					background-size:100% 100%;
+					animation:anipremio 1.5s infinite linear;
+					-webkit-animation:anipremio 1.5s infinite linear;
+				}
+				
+				#img-premio
+				{
+					width:196px;
+					height:190px;
+					position:absolute;
+					top:185px;
+					left:105px;
+					background-position:center center;
+					background-size:100% 100%;
+				}
+				
+				.premio1
+				{
+					background-image:url(../img/medidores/aliado%20internacional.png);
+				}
+				
+				
+				#cerrar-premio
+				{
+					position:absolute;
+					top:20px;
+					right:0px;
+					width:60px;
+					height:60px;
+					cursor:pointer;
+					border-radius:60px;
+					font-size:40px;
+				}
+				
+				#premio p
+				{
+					font-family:"YanoneKa";
+					font-size:80px;
+					margin-left:650px;
+					margin-top:250px;
+					font-weight:500;
+					color:rgba(255,224,3,1.00);
+					text-shadow:-3px -3px 0px rgba(209,154,0,1.00);
+				}
+#ctrlvol
+{
+	width:120px;
+	height:40px;
+	position:absolute;
+	top:5px;
+	left:550px;
+	z-index:800;
+}
+#highvl
+{
+	width:60px;
+	height:40px;
+	position:absolute;
+	top:0px;
+	left:0px;
+	text-align:center;
+	cursor:pointer;
+	font-size:28px;
+	color:rgba(255,255,255,1.00);
+}
+#mutvl
+{
+	width:60px;
+	height:40px;
+	position:absolute;
+	top:0px;
+	right:0px;
+	text-align:center;
+	cursor:pointer;
+	font-size:28px;
+	color:rgba(255,255,255,1.00);
+}
+				#iramedidor
+				{
+					width:250px;
+					height:50px;
+					background-color:rgba(255,206,0,1.00);
+					color:rgba(132,97,0,1.00);
+					list-style:none;
+					font-size:32px;
+					padding-top:3px;
+					margin-left:670px;
+					margin-top:50px;
+					text-align:center;
+					box-sizing:border-box;
+					cursor:pointer;
+					z-index:10;
+					border-radius:25px;
+					box-shadow:0px 8px 0px #C6A000, 0px 13px 2px rgba(0,0,0,0.50);
+				}
+				
+				#iramedidor:active
+				{
+					box-shadow:0px 3px 0px #C6A000;
+					-webkit-transform:translate(0px,6px);
+					transform:translate(0px,6px);
+				}
+				
+				#iramedidor a
+				{
+					text-align:center;
+					text-decoration:none;
+					color:rgba(132,97,0,1.00);
+					padding:5px 80px 10px 75px;
+					font-family:"century";
+				}
+				
+				#ultimo
+				{
+				margin-left:30px;
+				margin-top:8px;
+				font-size:40px;
+                color:rgba(255,224,3,1.00);
+				font-family:"YanoneKa";
+				font-weight:500;
+				text-shadow:-3px -3px 0px rgba(209,154,0,1.00);
+				}
+				
+				#bindex
+				{
+					width:90px;
+					height:90px;
+					background-image:url(../img/medidores/boton-volver.png);
+					background-position:center center;
+					background-size:100% 100%;
+					position:absolute;
+					display:none;
+					top:5px;
+					left:5px;
+					cursor:pointer;
+					z-index:10;
+				}
+				
+				#bindex a
+				{
+					padding-top:45px;
+					padding-bottom:55px;
+					padding-left:90px;
+				}
+            
+        .vidas{
+                position: absolute;
+                font-family: helvetica;
+                color:red;
+                font-size: 24px;
+                top: 5px !important;
+                left: 20px;
+            }
+			
+            #deslineal
+			{
+				position:absolute;
+				top:300px;
+				left:0px;
+				width:1200px;
+				height:150px;
+				z-index:6;
+				box-sizing:border-box;
+			}
+			
+			#desvertical
+			{
+				position:absolute;
+				top:390px;
+				left:0px;
+				width:1200px;
+				height:150px;
+				z-index:6;
+				box-sizing:border-box;
+			}
+			
+			#deslineal li
+			{
+				list-style:none;
+				cursor:pointer;
+				font-size:46px;
+				padding-top:20px;
+				padding-left:25px;
+				text-shadow:0px 0px 8px rgba(0,0,0,0.90);
+				box-sizing:border-box;
+				display:inline-block;
+			}
+			
+			#desvertical li
+			{
+				list-style:none;
+				cursor:pointer;
+				font-size:46px;
+				padding-top:20px;
+				padding-left:25px;
+				text-shadow:0px 0px 8px rgba(0,0,0,0.90);
+				box-sizing:border-box;
+				display:inline-block;
+			}
+			
+			#go
+			{
+				width:95px;
+				height:90px;
+				border-radius:100px;
+				cursor:pointer;
+				color:rgba(255,255,255,1.00);
+				box-sizing:border-box;
+				background-color:rgba(162,162,162,0.55);
+				box-shadow:0px 8px 0px rgba(72,72,72,0.50), 0px 13px 2px rgba(0,0,0,0.50);
+			}
+
+			#go:active
+			{
+				box-shadow:0px 8px 0px rgba(72,72,72,0.50);
+				-webkit-transform:translate(0px,6px);
+				transform:translate(0px,6px);
+			}
+			
+			#back
+			{
+				width:95px;
+				height:90px;
+				border-radius:100px;
+				cursor:pointer;
+				margin-right:1000px;
+				color:rgba(255,255,255,1.00);
+				box-sizing:border-box;
+				background-color:rgba(162,162,162,0.55);
+				box-shadow:0px 8px 0px rgba(72,72,72,0.50), 0px 13px 2px rgba(0,0,0,0.50);
+			}
+
+			#back:active
+			{
+				box-shadow:0px 8px 0px rgba(72,72,72,0.50);
+				-webkit-transform:translate(0px,6px);
+				transform:translate(0px,6px);
+			}
+            
+            
+
+        #derecha
+			{
+				width:95px;
+				height:90px;
+				border-radius:100px;
+				cursor:pointer;
+				color:rgba(255,255,255,1.00);
+				box-sizing:border-box;
+				background-color:rgba(162,162,162,0.55);
+				box-shadow:0px 8px 0px rgba(72,72,72,0.50), 0px 13px 2px rgba(0,0,0,0.50);
+                left: 150px;
+                top: 11px;
+                position: absolute;
+			}
+
+			#derecha:active
+			{
+				box-shadow:0px 8px 0px rgba(72,72,72,0.50);
+				-webkit-transform:translate(0px,6px);
+				transform:translate(0px,6px);
+			}
+			
+			#izquierda
+			{
+				width:95px;
+				height:90px;
+				border-radius:100px;
+				cursor:pointer;
+				margin-right:1000px;
+				color:rgba(255,255,255,1.00);
+				box-sizing:border-box;
+				background-color:rgba(162,162,162,0.55);
+				box-shadow:0px 8px 0px rgba(72,72,72,0.50), 0px 13px 2px rgba(0,0,0,0.50);
+                left: 950px;
+                top: 11px;
+                position: absolute;
+			}
+
+			#izquierda:active
+			{
+				box-shadow:0px 8px 0px rgba(72,72,72,0.50);
+				-webkit-transform:translate(0px,6px);
+				transform:translate(0px,6px);
+			}
+			
+#volver
+{
+	width:90px;
+	height:90px;
+	background-image:url(../img/medidores/boton-volver.png);
+	background-position:center center;
+	background-size:100% 100%;
+	position:absolute;
+	top:5px;
+	right:5px;
+	cursor:pointer;
+	z-index:20;
+}
+
+#volver a
+{
+	padding-top:45px;
+	padding-bottom:55px;
+	padding-left:90px;
+}
+
+@font-face {
+	font-family: 'icomoon';
+	src:url('../icomoon/fonts/icomoon.eot?z69so9');
+	src:url('../icomoon/fonts/icomoon.eot?#iefixz69so9') format('embedded-opentype'),
+		url('../icomoon/fonts/icomoon.woff?z69so9') format('woff'),
+		url('../icomoon/fonts/icomoon.ttf?z69so9') format('truetype'),
+		url('../icomoon/fonts/icomoon.svg?z69so9#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-location:before {
+	content: "\e600";
+}
+.icon-location2:before {
+	content: "\e601";
+}
+.icon-undo:before {
+	content: "\e602";
+}
+.icon-redo:before {
+	content: "\e603";
+}
+.icon-undo2:before {
+	content: "\e604";
+}
+.icon-redo2:before {
+	content: "\e605";
+}
+.icon-forward:before {
+	content: "\e606";
+}
+.icon-reply:before {
+	content: "\e607";
+}
+.icon-lock:before {
+	content: "\e608";
+}
+.icon-lock2:before {
+	content: "\e609";
+}
+.icon-close:before {
+	content: "\e60a";
+}
+.icon-checkmark:before {
+	content: "\e60b";
+}
+.icon-volume-high:before {
+	content: "\e60c";
+}
+.icon-volume-mute:before {
+	content: "\e60d";
+}
+.icon-arrow-up:before {
+	content: "\e60e";
+}
+.icon-arrow-right:before {
+	content: "\e60f";
+}
+.icon-arrow-down:before {
+	content: "\e610";
+}
+.icon-arrow-left:before {
+	content: "\e611";
+}
+.icon-arrow-up2:before {
+	content: "\e612";
+}
+.icon-arrow-right2:before {
+	content: "\e613";
+}
+.icon-arrow-down2:before {
+	content: "\e614";
+}
+.icon-arrow-left2:before {
+	content: "\e615";
+}
+.icon-arrow-up3:before {
+	content: "\e616";
+}
+.icon-arrow-right3:before {
+	content: "\e617";
+}
+.icon-arrow-down3:before {
+	content: "\e618";
+}
+.icon-arrow-left3:before {
+	content: "\e619";
+}
+.icon-radio-checked:before {
+	content: "\e61a";
+}

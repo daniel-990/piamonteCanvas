@@ -1,0 +1,1796 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, height =device-height,initial-scale=0.7 , user-scalable=no"> 
+  <title>apurate</title>
+  <link rel="shortcut icon" href="../favicon.ico" />
+  <script src="../js/modernizr.custom.39764.js" type="text/javascript"></script> 
+
+        <link type="text/css" rel="stylesheet" href="../css/juego-piamonte.css"/>
+        <script src="../js/jquery-2.1.0.min.js" type="text/javascript"></script>
+
+          <script>
+            window.onload = function(){
+				
+				document.getElementById("ambiente").play();
+				document.getElementById("smusic").play();
+				
+				$("#highvl").click(function(){
+		
+	/*lvol = true;*/
+	document.getElementById("ambiente").play();
+		document.getElementById("smusic").play();
+		
+		});
+		
+	$("#mutvl").click(function(){
+		
+	/*lvol = false;*/
+	document.getElementById("ambiente").pause();
+		document.getElementById("smusic").pause();
+	
+		});
+				
+				$("#rett").click(function(){
+        		location.reload();
+				})
+                
+                var canvas = document.getElementById("canvas");
+                ctx = canvas.getContext("2d");
+                
+                var frame = 0;
+                var framecometa = 0;
+				var framegota = 0;
+                var right = false;
+                var left = false;
+                var go = false;
+				var back = false;
+                
+                var monedaImg;
+                var xMoneda = Math.random() * canvas.width;
+                var yMoneda = 210;
+                
+                var gotaImg3;
+				var xgota3 = canvas.width/1.1;//gota 1;
+                var ygota3 =-400; 
+                
+                var gotaImg2;
+				var xgota2 = canvas.width/0.8;//gota 2;
+                var ygota2 = -300;
+                
+                var gotaImg5;
+                var xgota5 = canvas.width/0.600;//gota 3;
+                var ygota5 =-500;
+                
+                var gotaImg;
+				var xgota = canvas.width/0.5;//gota 4; //primera tanda de jaulas;
+                var ygota = -200;
+                
+                var gotaImg6;
+				var xgota6 = canvas.width/0.20;//gota 5;
+                var ygota6 =-400; 
+                
+                var gotaImg7;
+				var xgota7 = canvas.width/0.19;//gota 6;
+                var ygota7 = -300;
+                
+                var gotaImg8;
+                var xgota8 = canvas.width/0.18;//gota 7;
+                var ygota8 =-500;
+                
+                var gotaImg9;
+				var xgota9 = canvas.width/0.17;//gota 8;//segunda tanda de jaulas;
+                var ygota9 = -200;
+                
+                var trampaImg;
+				var xTrampa = canvas.width/0.91;
+                var yTrampa = 230;
+                
+                var trampaImg2;
+				var xTrampa2 = canvas.width/0.67;
+                var yTrampa2 = 230;
+                
+                var trampaImg3;
+				var xTrampa3 = canvas.width/0.53;
+                var yTrampa3 = 230;
+                
+                var frameAve = 0;
+                var Ave1Img;
+			    var xAve = canvas.width/11;
+                var yAve = 180;
+                
+				var velX= 0;
+                var velY = 0;
+                
+				var tX = 0;
+                
+				var vX = -5;//Velocidad edificio 1 y 2 
+                var vY = -5;
+                var vY2 = 5;
+                var vY3 = 5;
+                
+                var vX2 = -5;
+				var vX3 = -1;
+				var th2 = -0.5;
+				var limite = canvas.width;
+				var estado = 0;
+				var score;
+				var ultimo = localStorage.ultimopi;
+				var contador = 0;
+				var tiempo = 0;
+				var playGame = true;
+                
+                var yAnimar = 3;
+                var xAnimar = 0.1;
+                
+                var framePiedra = 0; //a qui se hace la nimacion;
+                var framePiedra2 = 0; //a qui se hace la nimacion;
+                var framePiedra3 = 0; //a qui se hace la nimacion;
+                var framePiedra4 = 0; //a qui se hace la nimacion;
+                var frameMoneda = 0; //aqui se hace la animacion;
+                
+                var distX = 0;
+                var distY = 0;
+
+                
+                var thrust = 1;
+                var thrust2 = 2;
+                var thrust3 = 3;
+                var thrust4 = 4;
+                
+                var velX2 = 0;
+                var velY2 = 0;
+                
+                var velX3 = 0;
+                var velY3 = 0;
+                
+                var velX4 = 0;
+                var velY4 = 0;
+                
+                var velX5 = 0;
+                var velY5 = 0;
+                
+                var tmpEdificio;
+                var tmpgota;
+                var tmpCometa;
+                var tmpfruta; //lo acabe de hacer----------------
+            
+                
+               var boomImg;
+ 
+                var framecauchera3 =0; //aqui voy----------------------------------------------------------
+                var cauchera3;
+                var xcauchera3 = canvas.width/0.32;//1
+                var ycauchera3 = canvas.height/1.2;
+                
+                var cauchera1;
+                var xcauchera1 = canvas.width/0.29;//2
+                var ycauchera1 = canvas.height/1.2;
+                
+                var cauchera2;
+                var xcauchera2 = canvas.width/0.26;//3
+                var ycauchera2 = canvas.height/1.2;
+
+                var framePiedra7 = 0;
+                var piedra7;
+                var xpiedra7 = canvas.width/0.32;//roca1
+                var ypiedra7 = canvas.height/1.3 ;
+                
+                var framePiedra5 = 0; 
+                var piedra5;
+                var xpiedra5 = canvas.width/0.29;
+                var ypiedra5 = canvas.height/1.3 ;//roca2
+                
+                var framePiedra6 = 0;
+                var piedra6;
+                var xpiedra6 = canvas.width/0.26;
+                var ypiedra6 = canvas.height/1.3 ;//roca3
+                
+                var cebo1;
+                var xcebo1 = canvas.width/0.38;
+                var ycebo1 = canvas.height/1.7;
+                // en x es 0.44
+                
+                var cebo2;
+                var xcebo2 = canvas.width/0.44;
+                var ycebo2 = canvas.height/1.9;
+                
+                var cebo3;
+                var xcebo3 = canvas.width/0.15;
+                var ycebo3 = canvas.height/1.9;
+                
+                var cebo4;
+                var xcebo4 = canvas.width/0.14;
+                var ycebo4 = canvas.height/1.9;
+                
+                var cebo5;
+                var xcebo5 = canvas.width/0.13;
+                var ycebo5 = canvas.height/1.9;
+                
+                var monedacebo;
+                var frameMonedacebo = 0;
+                var xmonedacebo = canvas.width/0.376;
+                var ymonedacebo = canvas.height/1.7;
+                
+                var monedacebo2;
+                var frameMonedacebo2 = 0;
+                var xmonedacebo2 = canvas.width/0.44;
+                var ymonedacebo2 = canvas.height/1.9;
+                
+                var monedacebo3;
+                var frameMonedacebo3 = 0;
+                var xmonedacebo3 = canvas.width/0.149;
+                var ymonedacebo3 = canvas.height/1.9;
+                
+                var monedacebo4;
+                var frameMonedacebo4 = 0;
+                var xmonedacebo4 = canvas.width/0.139;
+                var ymonedacebo4 = canvas.height/1.9;
+                
+                var monedacebo5;
+                var frameMonedacebo5 = 0;
+                var xmonedacebo5 = canvas.width/0.130;
+                var ymonedacebo5 = canvas.height/1.9;
+                
+                var gotacebo;
+                var xgotacebo = canvas.width/0.38;//ultima canasta;
+                var ygotacebo = -250;
+                
+                var gotacebo2;
+                var xgotacebo2 = canvas.width/0.43;//ultima canasta2;
+                var ygotacebo2 = -250;
+                
+                var gotacebo3;
+                var xgotacebo3 = canvas.width/0.15;//ultima canasta3;
+                var ygotacebo3 = -250;
+                
+                var gotacebo4;
+                var xgotacebo4 = canvas.width/0.14;//ultima canasta4;
+                var ygotacebo4 = -250;
+                
+                var gotacebo5;
+                var xgotacebo5 = canvas.width/0.13;//ultima canasta5;
+                var ygotacebo5 = -250;
+                
+                var monedacauchera;
+                var framemonedacauchera = 0;
+                var xmonedacauchera = canvas.width/0.32;
+                var ymonedacauchera = canvas.height/2.95;
+                
+                var monedacauchera2;
+                var framemonedacauchera2 = 0;
+                var xmonedacauchera2 = canvas.width/0.29;
+                var ymonedacauchera2 = canvas.height/2.95;
+                
+                var monedacauchera3;
+                var framemonedacauchera3 = 0;
+                var xmonedacauchera3 = canvas.width/0.26;
+                var ymonedacauchera3 = canvas.height/2.95;
+                
+                var moneda1;
+                var framemoneda1 = 0;
+                var xmoneda1 = canvas.width/0.21;
+                var ymoneda1 = canvas.height/1.5;
+                
+                var moneda2;
+                var framemoneda2 = 0;
+                var xmoneda2 = canvas.width/0.22;
+                var ymoneda2 = canvas.height/1.50;
+                
+                var moneda3;
+                var framemoneda3 = 0;
+                var xmoneda3 = canvas.width/0.23;
+                var ymoneda3 = canvas.height/2.95;
+                
+                var moneda4;
+                var framemoneda4 = 0;
+                var xmoneda4 = canvas.width/0.24;
+                var ymoneda4 = canvas.height/2.95;
+    
+                var Ave2;
+			    var xAve2 = canvas.width/11;
+                var yAve2 = 180;
+                
+                var vidas = 3;
+                var aveVidas;
+                
+                var meta;
+                var xmeta = canvas.width/0.100;
+                var ymeta = 200;
+                
+                var flecha;
+                var xflecha = canvas.width/0.100;
+                var yflecha = 70;
+                
+                var colition = false;
+                
+                var final=true;
+                
+                var garra_gato;
+                var xgarra_gato = canvas.width/1.16;
+                var ygarra_gato = canvas.height/2.95;
+                
+                var garra_gato2;
+                var xgarra_gato2 = canvas.width/0.121;
+                var ygarra_gato2 = canvas.height/1.91;
+                
+                var gato2;
+                var xgato2 = canvas.width/0.12;
+                var ygato2 = canvas.height/1.91;
+                
+                var garra_gato3;
+                var xgarra_gato3 = canvas.width/0.115;
+                var ygarra_gato3 = canvas.height/1.91;
+                
+                var garra_gato4;
+                var xgarra_gato4 = canvas.width/0.119;
+                var ygarra_gato4 = canvas.height/1.91;
+                
+                var garra_gato5;
+                var xgarra_gato5 = canvas.width/0.113;
+                var ygarra_gato5 = canvas.height/1.91;
+                
+                var gato3;
+                var xgato3 = canvas.width/0.114;
+                var ygato3 = canvas.height/1.91;
+                
+                var fruta;
+                var xfruta = canvas.width/0.115;
+                var yfruta = canvas.height/3.5;
+                
+                var fruta2;
+                var xfruta2 = canvas.width/0.121;
+                var yfruta2 = canvas.height/3.5;
+                
+                var frameperro =0;
+                var perro;
+                var xperro = canvas.width/0.105;
+                var yperro = canvas.height/2.1;
+                
+//              var contador2 = 0;
+                var contador = 0;
+				var tiempo = 0;
+                var tiempo2 = 0;
+                var tiempo3 =0;
+                var animate = false;
+                
+                var fondo;
+                var xfondo = 0;
+                var yfondo = 0;
+                
+				
+				
+				$("#ultimo").html("ULTIMO PUNTAJE: " + ultimo);
+                //frutas------------------------>
+				if(score == null)
+				{
+					score = 0;
+				}
+                
+                
+         //-------------------------------------------------------------------------------------       			
+				Ave1Img = new Image();
+                Ave1Img.src = "../img/img-piamonte/ave1.png";
+                
+                gotaImg = new Image();
+                gotaImg.src = "../img/img-piamonte/trampa2.png";
+                
+                gotaImg2 = new Image();
+                gotaImg2.src = "../img/img-piamonte/trampa2.png";
+                
+                gotaImg3 = new Image();
+                gotaImg3.src = "../img/img-piamonte/trampa2.png";
+                
+                gotaImg5 = new Image();
+                gotaImg5.src = "../img/img-piamonte/trampa2.png";//primera tanda;
+                
+                gotaImg6 = new Image();
+                gotaImg6.src = "../img/img-piamonte/trampa2.png";
+                
+                gotaImg7 = new Image();
+                gotaImg7.src = "../img/img-piamonte/trampa2.png";
+                
+                gotaImg8 = new Image();
+                gotaImg8.src = "../img/img-piamonte/trampa2.png";
+                
+                gotaImg9 = new Image();
+                gotaImg9.src = "../img/img-piamonte/trampa2.png";//segunda tanda;
+                
+                gotacebo = new Image();
+                gotacebo.src = "../img/img-piamonte/trampa2.png";
+                
+                gotacebo2 = new Image();
+                gotacebo2.src = "../img/img-piamonte/trampa2.png";
+                     
+                gotacebo3 = new Image();
+                gotacebo3.src = "../img/img-piamonte/trampa2.png";
+                
+                gotacebo4 = new Image();
+                gotacebo4.src = "../img/img-piamonte/trampa2.png";
+                
+                gotacebo5 = new Image();
+                gotacebo5.src = "../img/img-piamonte/trampa2.png";
+                
+                monedaImg = new Image();
+				monedaImg.src = "../img/img-piamonte/bicho1.png";
+                
+                trampaImg = new Image();
+                trampaImg.src = "../img/img-piamonte/garra-derecha.png"
+                
+                trampaImg2 = new Image();
+                trampaImg2.src = "../img/img-piamonte/garra-derecha.png"
+                
+                trampaImg3 = new Image();
+                trampaImg3.src = "../img/img-piamonte/garra-derecha.png" //aqui voy en el codigo 
+                
+				boomImg = new Image();
+                boomImg.src = "../img/img-piamonte/ave4.png";
+            
+                cauchera1 = new Image();
+                cauchera1.src = "../img/img-piamonte/cauchera.png";
+                
+                cauchera2 = new Image();
+                cauchera2.src = "../img/img-piamonte/cauchera.png";
+                
+                cauchera3 = new Image();
+                cauchera3.src = "../img/img-piamonte/cauchera.png";
+                
+                piedra5 = new Image();
+                piedra5.src = "../img/img-piamonte/roca.png"
+                
+                piedra6 = new Image();
+                piedra6.src = "../img/img-piamonte/roca.png"
+                
+                piedra7 = new Image();
+                piedra7.src = "../img/img-piamonte/roca.png"
+				
+                cebo1 = new Image();
+                cebo1.src = "../img/img-piamonte/cebo.png"
+                
+                cebo2 = new Image();
+                cebo2.src = "../img/img-piamonte/cebo.png"
+                
+                cebo3 = new Image();
+                cebo3.src = "../img/img-piamonte/cebo.png"
+                
+                cebo4 = new Image();
+                cebo4.src = "../img/img-piamonte/cebo.png"
+                
+                cebo5 = new Image();
+                cebo5.src = "../img/img-piamonte/cebo.png"
+                
+                monedacebo = new Image();
+                monedacebo.src = "../img/img-piamonte/platico.png"; 
+                
+                monedacebo2 = new Image();
+                monedacebo2.src = "../img/img-piamonte/platico.png";
+                
+                monedacebo3 = new Image();
+                monedacebo3.src = "../img/img-piamonte/platico.png";
+                
+                monedacebo4 = new Image();
+                monedacebo4.src = "../img/img-piamonte/platico.png";
+                
+                monedacebo5 = new Image();
+                monedacebo5.src = "../img/img-piamonte/platico.png";
+                
+                monedacauchera = new Image();
+                monedacauchera.src = "../img/img-piamonte/bicho4.png";
+                
+                monedacauchera2 = new Image();
+                monedacauchera2.src = "../img/img-piamonte/bicho4.png";
+                
+                monedacauchera3 = new Image();
+                monedacauchera3.src = "../img/img-piamonte/bicho4.png";
+                
+                moneda1 = new Image();
+                moneda1.src = "../img/img-piamonte/bicho1.png";
+                
+                moneda2 = new Image();
+                moneda2.src = "../img/img-piamonte/bicho1.png";
+                
+                moneda3 = new Image();
+                moneda3.src = "../img/img-piamonte/bicho1.png";
+                
+                moneda4 = new Image();
+                moneda4.src = "../img/img-piamonte/bicho1.png";
+                
+                aveVidas = new Image();
+                aveVidas.src = "../img/img-piamonte/41.png"
+                
+                meta = new Image();
+                meta.src = "../img/img-piamonte/llaveAsomadera.png";
+                
+                flecha = new Image();
+                flecha.src = "../img/img-piamonte/flecha.png";
+                
+                garra_gato = new Image();
+                garra_gato.src = "../img/img-piamonte/garra-derecha.png";
+                
+                garra_gato2 = new Image();
+                garra_gato2.src = "../img/img-piamonte/garra-derecha.png";
+                
+                gato2 = new Image();
+                gato2.src = "../img/img-piamonte/gato-vaca.png";
+                
+                garra_gato3 = new Image();
+                garra_gato3.src = "../img/img-piamonte/garra-derecha.png";
+
+                garra_gato4 = new Image();
+                garra_gato4.src = "../img/img-piamonte/garra-izquierda.png";
+                
+                garra_gato5 = new Image();
+                garra_gato5.src = "../img/img-piamonte/garra-izquierda.png";
+                
+                gato3 = new Image();
+                gato3.src = "../img/img-piamonte/gato-vaca.png";
+                
+                fruta = new Image();
+                fruta.src = "../img/img-piamonte/fruta.png";
+                
+                fruta2 = new Image();
+                fruta2.src = "../img/img-piamonte/fruta.png";
+                
+                perro = new Image();
+                perro.src = "../img/img-piamonte/perro.png";
+                
+                fondo = new Image();
+                fondo.src ="";
+        
+     
+                $("#izquierda").on('touchstart', function(e){
+//                    
+                     if(xfondo < -5600) //con esta condicion se hace el inicio del ave en area!!!!!!!!!!;
+					
+                    {
+                        
+						localStorage.base1 = 'desblockk';
+							$("#amigar-tangara").fadeIn(1000);
+								$("#img-premio").addClass("premio1");
+								$("#premio p").html('Aliado Internacional');
+								localStorage.premio1 = 'cambio';
+								localStorage.ppiamonte = '500';
+								$("#continuar-premio").click(function(){
+									
+									document.getElementById("iras").play();
+									$("#premio").fadeIn(1000);
+									document.getElementById("ganaste").play();
+									
+									});
+					}
+					
+						xAve += 30;
+                        xfondo -= 80;
+						$("#canvas").css("background-position" ,"+=-50px center");
+                        xgota -= 80;
+                        xgota2 -= 80;
+                        xgota3 -= 80;
+                        xgota5 -= 80;
+                        xgota6 -= 80;
+                        xgota7 -= 80;
+                        xgota8 -= 80;
+                        xgota9 -= 80;
+                        
+                        xgotacebo -= 80;
+                        xgotacebo2 -= 80;
+                        
+                        xgotacebo3 -= 80;
+                        xgotacebo4 -= 80;
+                        xgotacebo5 -= 80;
+                        
+                        xMoneda -=80;
+                        xmonedacebo -=80;
+                        xmonedacebo2 -=80;
+                        xmonedacebo3 -=80;
+                        xmonedacebo4 -=80;
+                        xmonedacebo5 -=80;
+                        xTrampa -=80;
+                        xTrampa2 -=80;
+                        xTrampa3 -=80;
+                        xcauchera1 -=80;
+                        xcauchera2 -=80;
+                        xcauchera3 -=80;
+                        xpiedra5 -=80;
+                        xpiedra6 -=80;
+                        xpiedra7 -=80;
+                        xcebo1 -=80;
+                        xcebo2 -=80;
+                        xcebo3 -=80;
+                        xcebo4 -=80;
+                        xcebo5 -=80;
+                        xmonedacauchera -=80;
+                        xmonedacauchera2 -=80;
+                        xmonedacauchera3 -=80;
+                        
+                        xmoneda1 -=80;
+                        xmoneda2 -=80;
+                        xmoneda3 -=80;
+                        xmoneda4 -=80;
+                        
+                        xgarra_gato2 -=80;
+                        xgato2 -=80;
+                        
+                        xgarra_gato3 -=80;
+                        xgarra_gato4 -=80;
+                        xgarra_gato5 -=80;
+                        xgato3 -=80;
+                        
+                        xfruta -=80;
+                        xfruta2 -=80;
+                        
+                        xperro -=80;
+                        
+                        xmeta -= 80;
+                        xflecha -= 80;
+                   
+					});
+					
+                $("#derecha").on('touchstart', function(e) {
+               
+                
+                      xAve -= 30;
+                    
+                
+                });
+                
+                $("#back").on('touchstart', function(e) {
+               
+                      yAve -= 30;
+                  
+                });
+                
+                $("#go").on('touchstart', function(e) {
+             1
+                      yAve += 30;
+                });
+					
+				 window.addEventListener('keydown', function(e){
+					
+                    if (e.keyCode == 39){
+						grados = frameAve * -360;
+                        distX = Math.sin(grados * Math.PI / 180) * 5;
+                        distY = -Math.cos(grados * Math.PI / 180) * 5;
+                        right = true;
+						$("#canvas").css("background-position","+=-80px center");
+                        
+                if(xfondo < -5600) //con esta condicion se hace el inicio del ave en area!!!!!!!!!!;
+					
+                    {
+                        
+						localStorage.base1 = 'desblockk';
+							$("#amigar-tangara").fadeIn(1000);
+								$("#img-premio").addClass("premio1");
+								$("#premio p").html('Aliado Internacional');
+								localStorage.premio1 = 'cambio';
+								localStorage.ppiamonte = '500';
+								$("#continuar-premio").click(function(){
+									
+									document.getElementById("iras").play();
+									$("#premio").fadeIn(1000);
+									document.getElementById("ganaste").play();
+									
+									});
+					}
+                        
+                        xfondo -= 80;
+                        
+                        xgota -= 80;
+                        xgota2 -= 80;
+                        xgota3 -= 80;
+                        xgota5 -= 80;
+                        xgota6 -= 80;
+                        xgota7 -= 80;
+                        xgota8 -= 80;
+                        xgota9 -= 80;
+                        
+                        xgotacebo -= 80;
+                        xgotacebo2 -= 80;
+                        
+                        xgotacebo3 -= 80;
+                        xgotacebo4 -= 80;
+                        xgotacebo5 -= 80;
+                        
+                        xMoneda -=80;
+                        xmonedacebo -=80;
+                        xmonedacebo2 -=80;
+                        xmonedacebo3 -=80;
+                        xmonedacebo4 -=80;
+                        xmonedacebo5 -=80;
+                        xTrampa -=80;
+                        xTrampa2 -=80;
+                        xTrampa3 -=80;
+                        xcauchera1 -=80;
+                        xcauchera2 -=80;
+                        xcauchera3 -=80;
+                        xpiedra5 -=80;
+                        xpiedra6 -=80;
+                        xpiedra7 -=80;
+                        xcebo1 -=80;
+                        xcebo2 -=80;
+                        xcebo3 -=80;
+                        xcebo4 -=80;
+                        xcebo5 -=80;
+                        xmonedacauchera -=80;
+                        xmonedacauchera2 -=80;
+                        xmonedacauchera3 -=80;
+                        
+                        xmoneda1 -=80;
+                        xmoneda2 -=80;
+                        xmoneda3 -=80;
+                        xmoneda4 -=80;
+                        
+                        xgarra_gato2 -=80;
+                        xgato2 -=80;
+                        
+                        xgarra_gato3 -=80;
+                        xgarra_gato4 -=80;
+                        xgarra_gato5 -=80;
+                        xgato3 -=80;
+                        
+                        xfruta -=80;
+                        xfruta2 -=80;
+                        
+                        xperro -=80;
+                        
+                        xmeta -= 80;
+                        xflecha -= 80;
+                    }
+                    if (e.keyCode == 37) {
+						grados = frameAve * 360;
+                        distX = Math.sin(grados * Math.PI / 180) * 5;
+                        distY = -Math.cos(grados * Math.PI / 180) * 5;
+                        left = true;
+                        
+					}
+                     if (e.keyCode == 38){
+                        grados = frame * 4;
+                        distX = Math.sin(grados * Math.PI / 180) * 5;
+                        distY = -Math.cos(grados * Math.PI / 180) * 5;
+                        go = true;
+                    }
+                     if (e.keyCode == 40){
+				        grados = frame * 4;
+                        distX = Math.sin(grados * Math.PI / 180) * 5;
+                        distY = -Math.cos(grados * Math.PI / 180) * 5;
+                        back = true;
+                     
+                     }
+                     
+                });
+
+                window.addEventListener('keyup', function(e){
+                    if (e.keyCode == 39){
+                        right = false;
+                        
+                        xgota -= 80;
+                        xgota2 -= 80;
+                        xgota3 -= 80;
+                        xgota5 -= 80;
+                        xgota6 -= 80;
+                        xgota7 -= 80;
+                        xgota8 -= 80;
+                        xgota9 -= 80;
+                        
+                        xgotacebo -= 80;
+                        xgotacebo2 -= 80;
+                        
+                        xgotacebo3 -= 80;
+                        xgotacebo4 -= 80;
+                        xgotacebo5 -= 80;
+                        
+                        xMoneda -=80;
+                        xmonedacebo -=80;
+                        xmonedacebo2 -=80;
+                        xmonedacebo3 -=80;
+                        xmonedacebo4 -=80;
+                        xmonedacebo5 -=80;
+                        xTrampa -=80;
+                        xTrampa2 -=80;
+                        xTrampa3 -=80;
+                        xcauchera1 -=80;
+                        xcauchera2 -=80;
+                        xcauchera3 -=80;
+                        xpiedra5 -=80;
+                        xpiedra6 -=80;
+                        xpiedra7 -=80;
+                        xcebo1 -=80;
+                        xcebo2 -=80;
+                        xcebo3 -=80;
+                        xcebo4 -=80;
+                        xcebo5 -=80;
+                        xmonedacauchera -=80;
+                        xmonedacauchera2 -=80;
+                        xmonedacauchera3 -=80;
+                        
+                        xmoneda1 -=80;
+                        xmoneda2 -=80;
+                        xmoneda3 -=80;
+                        xmoneda4 -=80;
+                        
+                        xgarra_gato2 -=80;
+                        xgato2 -=80;
+                        
+                        xgarra_gato3 -=80;
+                        xgarra_gato4 -=80;
+                        xgarra_gato5 -=80;
+                        xgato3 -=80;
+                        
+                        xfruta -=80;
+                        xfruta2 -=80;
+                        xperro -=80;
+                        
+                        xmeta -= 80;
+                        xflecha -= 80;
+                        
+                    }
+                    if (e.keyCode == 37){
+                        left = false;
+                        
+                    }
+                    if (e.keyCode == 38){
+                        go = false;
+                    }
+				    if (e.keyCode == 40){
+                        back = false;
+                    }
+                });
+
+				function animation() {
+                    contador ++;  
+                    
+  
+                    
+                               
+    
+                    
+//--------------------------------------------------LIMITES DEL CANVAS
+
+                    //limites del canvas
+                    if(xAve < 1) {xAve = 0;}
+                    
+                    var limite = canvas.width - Ave1Img.width;
+                    
+                    var limite2 = 385;
+                    
+                    if(xAve >limite) {xAve = limite;}
+					
+                    if(yAve >limite2){yAve = limite2;}
+                    
+                    if (yAve < 1){yAve = 0;}
+//--------------------------------------------------LIMITES DEL CANVAS
+                    
+//--------------------------------------------------COliSION DE LOS PUNTOS;
+					tx1=xAve-xMoneda;//monedas;
+                    ty1=yAve-yMoneda;
+                    
+                    tx2=xAve-xgotacebo;//jaula que cae;
+                    ty2=yAve-ygotacebo-100;
+                    tx3=xAve-xgota3;//gota 1;
+                    ty3=yAve-ygota3 -100;
+                    tx4=xAve-xgota2;//gota 2;
+                    ty4=yAve-ygota2-100;
+                    tx5=xAve-xgota5;//gota 3;
+                    ty5=yAve-ygota5-100;
+                    tx6=xAve-xgota;//gota 4;
+                    ty6=yAve-ygota-100;
+                    tx7=xAve-xTrampa;//trampa 1;
+                    ty7=yAve-yTrampa-100;
+                    tx8=xAve-xTrampa2;//trampa 2;
+                    ty8=yAve-yTrampa2-100;
+                    tx9=xAve-xTrampa3;//trampa 3;
+                    ty9=yAve-yTrampa3-100;
+                    tx10=xAve-xmonedacebo;//moneda/cebo;
+                    ty10=yAve-ymonedacebo;
+                    tx11=xAve-xmonedacebo2;//moneda/cebo2;
+                    ty11=yAve-ymonedacebo2;
+                    tx12=xAve-xgotacebo2;//jaula que cae2;
+                    ty12=yAve-ygotacebo2-100;
+                    tx13=xAve-xpiedra7;//roca1;
+                    ty13=yAve-ypiedra7;
+                    tx14=xAve-xpiedra5;//roca2;
+                    ty14=yAve-ypiedra5;
+                    tx15=xAve-xpiedra6;//roca3;
+                    ty15=yAve-ypiedra6;
+                    
+                    tx16=xAve-xgotacebo3;//jaula que cae3;
+                    ty16=yAve-ygotacebo3-100;
+                    tx17=xAve-xgotacebo4;//jaula que cae4;
+                    ty17=yAve-ygotacebo4-100;
+                    tx18=xAve-xgotacebo5;//jaula que cae5;
+                    ty18=yAve-ygotacebo5-100;
+                    
+                    tx20=xAve-xmonedacebo3;////moneda/cebo3;
+                    ty20=yAve-ymonedacebo3;
+                    tx21=xAve-xmonedacebo4;////moneda/cebo4;
+                    ty21=yAve-ymonedacebo4;
+                    tx22=xAve-xmonedacebo5;////moneda/cebo5;
+                    ty22=yAve-ymonedacebo5;
+                    
+                    tx23=xAve - xmeta;//meta
+                    ty23=yAve - ymeta;
+                    
+                    tx24=xAve - xmoneda1;
+                    ty24=yAve - ymoneda1;
+                    tx25=xAve - xmoneda2;
+                    ty25=yAve - ymoneda2;
+                    tx26=xAve - xmoneda3;
+                    ty26=yAve - ymoneda3;
+                    tx27=xAve - xmoneda4;
+                    ty27=yAve - ymoneda4;
+                    
+                    tx28=xAve - xmonedacauchera;
+                    ty28=yAve - ymonedacauchera;
+                    tx29=xAve - xmonedacauchera2;
+                    ty29=yAve - ymonedacauchera2;
+                    tx30=xAve - xmonedacauchera3;
+                    ty30=yAve - ymonedacauchera3;
+                    
+                    tx31=xAve - xgota6;
+                    ty31=yAve - ygota6-100;
+                    tx32=xAve - xgota7;
+                    ty32=yAve - ygota7-100;
+                    tx33=xAve - xgota8;
+                    ty33=yAve - ygota8-100;
+                    tx34=xAve - xgota9;
+                    ty34=yAve - ygota9-100;
+                    
+                    tx35=xAve - xfruta;
+                    ty35=yAve - yfruta;
+                    tx36=xAve - xfruta2;
+                    ty36=yAve - yfruta2; 
+                    
+                    tx37=xAve - xgarra_gato2;
+                    ty37=yAve - ygarra_gato2;
+                      
+                    tx38=xAve - xgarra_gato3;
+                    ty38=yAve - ygarra_gato3;
+                    
+                    tx39=xAve - xgato2;
+                    ty39=yAve - ygato2;
+                    tx40=xAve - xgato3;
+                    ty40=yAve - ygato3;
+                    
+                    tx41=xAve - xperro;
+                    ty41=yAve - yperro;
+                    
+                    tx42=xAve - xgarra_gato4;
+                    ty42=yAve - ygarra_gato4;
+                    
+                     tx43=xAve - xgarra_gato5;
+                     ty43=yAve - ygarra_gato5;
+                    
+                    
+
+						dist1=Math.sqrt(tx1*tx1 + ty1*ty1);//--matematicas de la colision (monedas);
+                        dist2=Math.sqrt(tx2*tx2 + ty2*ty2);//--matematicas de la colision (jaula que cae);
+                        dist3=Math.sqrt(tx3*tx3 + ty3*ty3);//--matematicas de la colision jaula1
+                        dist4=Math.sqrt(tx4*tx4 + ty4*ty4);//--matematicas de la colision jaula2;
+                        dist5=Math.sqrt(tx5*tx5 + ty5*ty5);//--matematicas de la colision jaula3;
+                        dist6=Math.sqrt(tx6*tx6 + ty6*ty6);//--matematicas de la colision jaula4;
+                        dist7=Math.sqrt(tx7*tx7 + ty7*ty7);//--matematicas de la colision trampa1;
+                        dist8=Math.sqrt(tx8*tx8 + ty8*ty8);//--matematicas de la colision trampa2;
+                        dist9=Math.sqrt(tx9*tx9 + ty9*ty9);//--matematicas de la colision trampa2;
+                        dist10=Math.sqrt(tx10*tx10 + ty10*ty10);//--matematicas de la colision moneda/cebo;
+                        dist11=Math.sqrt(tx11*tx11 + ty11*ty11);//--matematicas de la colision moneda/cebo2;
+                        dist12=Math.sqrt(tx12*tx12 + ty12*ty12);//--matematicas de la colision (jaula que cae);
+                        dist13=Math.sqrt(tx13*tx13 + ty13*ty13);//--matematicas de la colision roca1;
+                        dist14=Math.sqrt(tx14*tx14 + ty14*ty14);//--matematicas de la colision roca2;
+                        dist15=Math.sqrt(tx15*tx15 + ty15*ty15);//--matematicas de la colision roca2;
+                    
+                        dist16=Math.sqrt(tx16*tx16 + ty16*ty16);//--matematicas de la colision cae jaula3
+                        dist17=Math.sqrt(tx17*tx17 + ty17*ty17);//--matematicas de la colision cae jaula4
+                        dist18=Math.sqrt(tx18*tx18 + ty18*ty18);//--matematicas de la colision cae jaula5
+
+                        dist20=Math.sqrt(tx20*tx20 + ty20*ty20);//--matematicas de la colision monedacebo3
+                        dist21=Math.sqrt(tx21*tx21 + ty21*ty21);//--matematicas de la colision monedacebo3
+                        dist22=Math.sqrt(tx22*tx22 + ty22*ty22);//--matematicas de la colision monedacebo3
+                 
+                        dist23=Math.sqrt(tx23*tx23 +ty23 *ty23 );//meta
+                    
+                        dist24=Math.sqrt(tx24*tx24 + ty24*ty24);//--matematicas de la colision modenas;
+                        dist25=Math.sqrt(tx25*tx25 + ty25*ty25);//--matematicas de la colision modenas;
+                        dist26=Math.sqrt(tx26*tx26 + ty26*ty26);//--matematicas de la colision modenas;
+                        dist27=Math.sqrt(tx27*tx27 + ty27*ty27);//--matematicas de la colision modenas; 
+                    
+                        dist28=Math.sqrt(tx28*tx28 + ty28*ty28);//--matematicas de la colision modenas;
+                        dist29=Math.sqrt(tx29*tx29 + ty29*ty29);//--matematicas de la colision modenas;
+                        dist30=Math.sqrt(tx30*tx30 + ty30*ty30);//--matematicas de la colision modenas;
+                    
+                        dist31=Math.sqrt(tx31*tx31 + ty31*ty31);//--matematicas de la colision modenas;
+                        dist32=Math.sqrt(tx32*tx32 + ty32*ty32);//--matematicas de la colision modenas;
+                        dist33=Math.sqrt(tx33*tx33 + ty33*ty33);//--matematicas de la colision modenas;
+                        dist34=Math.sqrt(tx34*tx34 + ty34*ty34);//--matematicas de la colision modenas;
+                        dist35=Math.sqrt(tx35*tx35 + ty35*ty35);//--matematicas de la colision modenas;
+                        dist36=Math.sqrt(tx36*tx36 + ty36*ty36);//--matematicas de la colision modenas;
+                        dist37=Math.sqrt(tx37*tx37 + ty37*ty37);
+                        dist38=Math.sqrt(tx38*tx38 + ty38*ty38);
+                    
+                    dist39=Math.sqrt(tx39*tx39 + ty39*ty39);
+                    dist40=Math.sqrt(tx40*tx40 + ty40*ty40);
+                    dist41=Math.sqrt(tx41*tx41 + ty41*ty41);
+                    
+                    dist42=Math.sqrt(tx42*tx42 + ty42*ty42);
+                    
+                    dist43=Math.sqrt(tx43*tx43 + ty43*ty43);
+                    
+
+                     if(Math.abs(ty3)<=5 && dist3<100 ||//jaulas 1 asta; en esta colision voy del juego listo-----------------------------------
+                        Math.abs(ty4)<=5 && dist4<100 || 
+                        Math.abs(ty5)<=5 && dist5<100 || 
+                        Math.abs(ty6)<=5 && dist6<100 ||
+                        Math.abs(tx7)<=10 && dist7<150 || Math.abs(ty7)<=100 && dist7<200 || //trampa1;
+                        Math.abs(tx8)<=10 && dist8<150 || Math.abs(ty8)<=100 && dist8<200 || //trampa1;
+                        Math.abs(tx9)<=10 && dist9<150 || Math.abs(ty9)<=100 && dist9<200 || //trampa1;
+                        Math.abs(ty2)<=5 && dist2<150 || 
+                        Math.abs(ty12)<=5 && dist12<100 || 
+                        Math.abs(ty13)<=10 && dist13<100 ||//rocas 
+                        Math.abs(ty14)<=10 && dist14<100 ||//rocas  
+                        Math.abs(ty15)<=10 && dist15<100 ||//roca3
+                        Math.abs(ty16)<=5 && dist16<100 ||
+                        Math.abs(ty17)<=5 && dist17<100 ||
+                        Math.abs(ty18)<=5 && dist18<100 ||
+                        Math.abs(ty31)<=5 && dist31<100 ||
+                        Math.abs(ty32)<=5 && dist32<100 ||
+                        Math.abs(ty33)<=5 && dist33<100 ||
+                        Math.abs(ty34)<=5 && dist34<100 ||
+                        Math.abs(tx37)<=10 && dist37<150 || Math.abs(ty37)<=10 && dist37<150 || 
+                        Math.abs(tx38)<=10 && dist38<150 || Math.abs(ty38)<=10 && dist38<150 || 
+                        Math.abs(tx39)<=5 && dist39<100 ||
+                        Math.abs(tx40)<=5 && dist40<100 ||
+                        Math.abs(tx41)<=5 && dist41<150 || Math.abs(ty41)<=5 && dist41<150 ||
+                        Math.abs(tx42)<=5 && dist42<150 || Math.abs(ty42)<=5 && dist42<150 ||
+                        Math.abs(tx43)<=5 && dist43<150 || Math.abs(ty43)<=5 && dist43<150
+                        ){
+                    
+                Ave1Img = boomImg;
+                    console.log("cambio");
+                    animate = true;
+                    tiempo2 = 0;
+            }
+                    
+            if (animate == true){
+                 yAve +=5;
+                tiempo2++;
+                }
+                    
+            if(tiempo2 == 10)
+                {
+                animate = false;
+//                boomImg = Ave1Img;
+                }
+
+                    
+                
+                    
+//                 if(score == 60){}
+				   if(tx1 && dist1<100){
+                       score += 30;
+				       xMoneda = -50;
+                       document.getElementById("bicho").play();
+                   }
+                    
+                   if(tx10 && dist10<100){
+                       score +=40;
+                       xmonedacebo =-50;
+                       document.getElementById("bicho").play();
+                       
+                   }
+                    
+                  if(tx11 && dist11<100){
+                       score +=40;
+                       xmonedacebo2 =-50;
+                      document.getElementById("bicho").play();
+                      
+                   }
+                 
+                  if(tx20 && dist20<100){
+                       score +=40;
+                       xmonedacebo3 =-50;
+                      document.getElementById("bicho").play();
+                   }
+                
+                   if(tx21 && dist21<100){
+                       score +=40;
+                       xmonedacebo4 =-50;
+                       document.getElementById("bicho").play();
+                   }
+                    
+                   if(tx22 && dist22<100){
+                       score +=40;
+                       xmonedacebo4 =-50;
+                       document.getElementById("bicho").play();
+                   }
+                 
+                  if(tx24 && dist24<100){
+                       score +=10;
+                       xmoneda1 =-50;
+                      document.getElementById("bicho").play();
+                   }
+                 
+                  if(tx25 && dist25<100){
+                       score +=10;
+                       xmoneda2 =-50;
+                      document.getElementById("bicho").play();
+                   }
+                 
+                  if(tx26 && dist26<100){
+                       score +=10;
+                       xmoneda3 =-50;
+                      document.getElementById("bicho").play();
+                   }
+                    
+                    if(tx27 && dist27<100){
+                       score +=10;
+                       xmoneda4 =-50;
+                     document.getElementById("bicho").play();
+                   }
+                    
+                  if(tx28 && dist28<100){
+                       score +=50;
+                       xmonedacauchera =-50;
+                      document.getElementById("bicho").play();
+                   }
+                    
+                  if(tx29 && dist29<100){
+                       score +=50;
+                       xmonedacauchera2 =-50;
+                      document.getElementById("bicho").play();
+                   }
+                    
+                   if(tx30 && dist30<100){
+                       score +=50;
+                       xmonedacauchera3 =-50;
+                       document.getElementById("bicho").play();
+                   }
+                    
+                  if(tx35 && dist35<100){
+                       score +=50;
+                       xfruta =-50;
+                      document.getElementById("bicho").play();
+                   }
+                    
+                  if(tx36 && dist36<100){
+                       score +=50;
+                       xfruta2 =-50;
+                      document.getElementById("bicho").play();
+                   }
+                    
+                    //aqui van el aumento de las vidas; linea 729 colision de la nave //
+                    
+                    if (Math.abs(ty3)<=5 && dist3<150 ||//jaulas 1 asta;
+                        Math.abs(ty4)<=5 && dist4<150 || 
+                        Math.abs(ty5)<=5 && dist5<150 || 
+                        Math.abs(ty6)<=5 && dist6<150 ||
+
+                        Math.abs(ty2)<=5 && dist2<150 || 
+                        Math.abs(ty12)<=5 && dist12<150 || 
+                        Math.abs(ty13)<=10 && dist13<100 ||//rocas 
+                        Math.abs(ty14)<=10 && dist14<100 ||//rocas  
+                        Math.abs(ty15)<=10 && dist15<100 ||//roca3
+                        Math.abs(ty16)<=5 && dist16<150 ||
+                        Math.abs(ty17)<=5 && dist17<150 ||
+                        Math.abs(ty18)<=5 && dist18<150 ||
+                        Math.abs(ty31)<=5 && dist31<150 ||
+                        Math.abs(ty32)<=5 && dist32<150 ||
+                        Math.abs(ty33)<=5 && dist33<150 ||
+                        Math.abs(ty34)<=5 && dist34<150 )
+                    {
+                        
+                        Ave1Img = boomImg;
+                        if(vidas==3 || vidas==2|| vidas==1){vidas-=1;
+                        document.getElementById("jaula").play();}
+                        
+                        console.log("hip")
+                        // Aca la imagen inicial vuelve
+					    var cambio;
+						cambio=setInterval(function(){
+	                    Ave1Img = new Image();
+                        Ave1Img.src = "../img/img-piamonte/ave1.png";
+			            },800);
+                    }
+                    
+                    if (Math.abs(tx37)<=10 && dist37<150 || Math.abs(ty37)<=10 && dist37<150 || //colision del gato ---------------------------------
+                        Math.abs(tx38)<=10 && dist38<150 || Math.abs(ty38)<=10 && dist38<150 || 
+                        Math.abs(tx42)<=5 && dist42<150 || Math.abs(ty42)<=5 && dist42<150 ||
+                        Math.abs(tx43)<=5 && dist43<150 || Math.abs(ty43)<=5 && dist43<150){
+                        
+                        Ave1Img = boomImg;
+                        if(vidas==3 || vidas==2|| vidas==1){vidas-=1; 
+                         document.getElementById("gato-impacto").play();
+                         document.getElementById("gato").play();}
+
+                        console.log("hip")
+                        // Aca la imagen inicial vuelve
+					    var cambio;
+						cambio=setInterval(function(){
+	                    Ave1Img = new Image();
+                        Ave1Img.src = "../img/img-piamonte/ave1.png";
+			            },800);
+                    }
+                    
+                    if(Math.abs(tx41)<=5 && dist41<150 || Math.abs(ty41)<=5 && dist41<150){ //colision del perro ---------------------------------
+                        Ave1Img = boomImg;
+                        if(vidas==3 || vidas==2|| vidas==1){vidas-=1; 
+                         document.getElementById("perro").play();}
+
+                        console.log("hip")
+                        // Aca la imagen inicial vuelve
+					    var cambio;
+						cambio=setInterval(function(){
+	                    Ave1Img = new Image();
+                        Ave1Img.src = "../img/img-piamonte/ave1.png";
+			            },800);
+                    }
+                    
+                    if(Math.abs(tx7)<=10 && dist7<150 || Math.abs(ty7)<=100 && dist7<200 || //trampa1;
+                        Math.abs(tx8)<=10 && dist8<150 || Math.abs(ty8)<=100 && dist8<200 || //trampa1;
+                        Math.abs(tx9)<=10 && dist9<150 || Math.abs(ty9)<=100 && dist9<200) //trampa1;)
+                       { 
+                        Ave1Img = boomImg;
+                        if(vidas==3 || vidas==2|| vidas==1){vidas-=1; 
+                        document.getElementById("gato").play();}
+
+                        console.log("hip")
+                        // Aca la imagen inicial vuelve
+					    var cambio;
+						cambio=setInterval(function(){
+	                    Ave1Img = new Image();
+                        Ave1Img.src = "../img/img-piamonte/ave1.png";
+			            },800);
+                }
+                    
+                if(Math.abs(tx39)<=5 && dist39<100 ||
+                   Math.abs(tx40)<=5 && dist40<100 ){
+                     
+                   Ave1Img = boomImg;
+                        if(vidas==3 || vidas==2|| vidas==1){vidas-=1; 
+                        document.getElementById("gato").play();}
+
+                        console.log("hip")
+                        // Aca la imagen inicial vuelve
+					    var cambio;
+						cambio=setInterval(function(){
+	                    Ave1Img = new Image();
+                        Ave1Img.src = "../img/img-piamonte/ave1.png";
+			            },800);
+                }
+                    
+                    
+                    if(tx10 && dist10<100){xmonedacebo = Ave1Img;
+                                           var rr; rr=setInterval ( 
+                                               function (){ygotacebo+=4;}),9000;
+                                           document.getElementById("bicho").play();document.getElementById("bicho2").play();}//colision de la moneda del cebo y trampa;
+                    
+                    if(tx11 && dist11<100){xmonedacebo2 = Ave1Img;
+                                           var rr; rr=setInterval ( 
+                                               function (){ygotacebo2+=4;}),9000;
+                                           document.getElementById("bicho").play();document.getElementById("bicho2").play();}//colision de la moneda del cebo y trampa;
+                    
+                    if(tx20 && dist20<100){xmonedacebo3 = Ave1Img;
+                                           var rr; rr=setInterval ( 
+                                               function (){ygotacebo3+=4;}),9000;
+                                           document.getElementById("bicho").play();document.getElementById("bicho2").play();}//colision de la moneda del cebo y trampa;
+                    
+                                        
+                    if(tx21 && dist21<100){xmonedacebo4 = Ave1Img;
+                                           var rr; rr=setInterval ( 
+                                               function (){ygotacebo4+=4;}),9000;
+                                           document.getElementById("bicho").play();document.getElementById("bicho2").play();}//colision de la moneda del cebo y trampa;
+                    
+                    if(tx22 && dist22<100){xmonedacebo5 = Ave1Img;
+                                           var rr; rr=setInterval ( 
+                                               function (){ygotacebo5+=4;}),9000;
+                                           document.getElementById("bicho").play();document.getElementById("bicho2").play();}//colision de la moneda del cebo y trampa;
+                    
+                    if(Math.abs(ty23)<=37  && dist23<100)
+                    {
+                        var cam; cam = setInterval (function(){distX = 1; yflecha=Ave1Img;  if(xAve<1100){   
+							localStorage.base1 = 'desblockk';
+							$("#amigar-tangara").fadeIn(1000);
+								$("#img-premio").addClass("premio1");
+								$("#premio p").html('Aliado Internacional');
+								localStorage.premio1 = 'cambio';
+								localStorage.ppiamonte = '500';
+								$("#continuar-premio").click(function(){
+									
+									document.getElementById("iras").play();
+									$("#premio").fadeIn(1000);
+									document.getElementById("ganaste").play();
+									
+									});
+									
+                    }}),1000; xmeta = Ave1Img; distX=null; final=null}
+                    
+                    if(Math.abs(ty23)<=37 && dist23<100){
+                        var cam; cam = setInterval (function(){
+                            $("#fl").addClass("no-visible");
+                            $(".vidas").addClass("no-visible");
+                            $("#rett2").fadeIn(1000);
+                        })
+                    }
+                  
+//------------------------------------------ANIMACIONES DE LOS ELEMENTOS DEL CANVAS;
+ 
+						  
+				    //--animandon las jaulas;
+                        ygota3 += 10;//gota1
+                        ygota2 += 10;//gota2
+                        ygota5 += 10;//gota3
+                        ygota += 10;//gora4
+                        ygota6 += yAnimar + 10;//gora5
+                        ygota7 += yAnimar + 10;//gora6
+                        ygota8 += yAnimar + 10;//gora7
+                        ygota9 += yAnimar + 10;//gora5
+                        
+                    //--animandon las jaulas;
+                    
+                    //--animandon las trampas atrapa mariposas;
+                        yTrampa += -2;//animar las trampas
+                        yTrampa2 += -2;//animar las trampas
+                        yTrampa3 += -3;//animar las trampas
+                        ygarra_gato2 += -2;
+                        ygarra_gato3 += -2;
+                        ygarra_gato4 += -1;
+                        ygarra_gato5 += -1;
+                    //--animandon las trampas atrapa mariposas;
+                    
+                    //animacion de las rocas;
+                        ypiedra5 += -15;
+                        ypiedra6 += -10;
+                        ypiedra7 += -18;
+                    //animacion de las rocas;
+                	
+				    //Se llama una imagen cuando coliciona y las vidas
+                    //Se llama una imagen cuando coliciona y las vidas
+                    
+                    yflecha +=1;//flecha
+                    
+                    if(yflecha -flecha.height > -265){ yflecha = 90;}
+				
+                    
+//SI PLAY GAME ES VERDADERO SE SIGUEN HACIENDO ANIMACIONES SI NO SE ACABO EL JUEGO
+                    if (playGame) {
+                        redraw();
+                        setTimeout(animation, 1000 / 60);                     
+						$("#score").html("SCORE " + score);
+						localStorage.ultimopi = score;	
+                        } else {
+                        document.getElementById("game").play();
+                        $("#over").fadeIn(1000);
+						$("#bindex").fadeIn(1000);
+                        $("#rett").fadeIn(5000);
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);  
+                        }
+						
+                   //frames de las piedras y monedas 
+                     framePiedra++;
+                     framePiedra2++;
+                     framePiedra3++;
+                     framePiedra4++;
+                     framePiedra5++;
+                     framePiedra6++;
+                     framePiedra7++;
+                     frameMoneda++;
+                     frameMonedacebo++;
+                     frameMonedacebo2++;
+                     frameMonedacebo3++;
+                     frameMonedacebo4++;
+                     frameMonedacebo5++;
+                     framemonedacauchera++;
+                     framemonedacauchera2++;
+                     framemonedacauchera3++;
+                     frameAve++;
+                     framemoneda1++;
+                     framemoneda2++;
+                     framemoneda3++;
+                     framemoneda4++;
+                     framecauchera3+=1;
+                     frameperro++;
+                    
+                    if (framePiedra >= 180) {
+                        framePiedra = 0;
+                    }
+                    
+                    if (framePiedra2 >= 180) {
+                        framePiedra2 = 0;
+                    }
+                    
+                     if (framePiedra3 >= 180) {
+                        framePiedra3 = 0;
+                    }
+                    
+                    if (framePiedra4 >= 180) {
+                        framePiedra4 = 0;
+                    }
+                    
+                    if (frameMoneda >= 8){
+                        frameMoneda = 0;
+                    }
+                    
+                    if (framemoneda1 >= 8){
+                        framemoneda1 = 0;
+                    }
+                    
+                   if (framemoneda2 >= 8){
+                        framemoneda2 = 0;
+                    }
+                    
+                   if (framemoneda3 >= 8){
+                        framemoneda3 = 0;
+                    }
+                    
+                   if (framemoneda4 >= 8){
+                        framemoneda4 = 0;
+                    }
+                    
+                   if (framePiedra5 >= 180){
+                        framePiedra5 = 0;
+                    }
+                    
+                   if (framePiedra6 >= 180){
+                        framePiedra6 = 0;
+                    }
+                    
+                   if (framePiedra7 >= 180){
+                        framePiedra7 = 0;
+                    }
+                    
+                   if (frameMonedacebo >= 8){
+                        frameMonedacebo = 0;
+                    }
+                    
+                   if (frameMonedacebo2 >= 8){
+                       frameMonedacebo2 = 0;
+                    }
+                    
+                    if (frameMonedacebo3 >= 8){
+                       frameMonedacebo3 = 0;
+                    }
+                    
+                    if (frameMonedacebo4 >= 8){
+                       frameMonedacebo4 = 0;
+                    }
+                    
+                    if (frameMonedacebo5 >= 8){
+                       frameMonedacebo5 = 0;
+                    }
+                    
+                   if (framemonedacauchera >= 8){
+                       framemonedacauchera = 0;
+                    }
+                    
+                   if (framemonedacauchera2 >= 8){
+                       framemonedacauchera2 = 0;
+                    }
+                    
+                   if (framemonedacauchera3 >= 8){
+                       framemonedacauchera3 = 0;
+                    }
+                    
+                   if (frameAve >= 18){
+                       frameAve = 0;
+                    }
+                    
+                   if (framecauchera3 >= 20){
+                       framecauchera3 = 0;
+                    }
+                    
+                  if (frameperro >= 2){
+                       frameperro = 0;
+                    }
+                    
+                    
+                //frames de las piedras y monedas 
+                 }
+                
+
+				 
+                function redraw() {               
+
+                	if (go) {
+                        xAve += distX;
+                        yAve += distY;
+                        frameAve++;
+                    }
+                    if (right) {
+                        xAve -= distY;
+                        yAve -= distX;
+                       
+                    }
+                    if (left) {
+                        xAve += distY;
+                        yAve += distX;
+                        
+                    }
+					
+				    if (back) {
+                        xAve -= distX;
+                        yAve -= distY;
+					  }
+                    
+                    
+                    
+                 // se pintan todos los edificios
+				   ctx.clearRect(0,0,canvas.width, canvas.height);
+//-------------------------------------------------------------------- VIDAS DEL AVE;
+
+                    if (vidas == 3) {
+                        ctx.drawImage(aveVidas, 20, 34, 164, 164, 100, 5, 40, 40);
+                        ctx.drawImage(aveVidas,20, 34, 164, 184, 150, 7, 40, 40);
+                        ctx.drawImage(aveVidas, 20, 34, 164, 204, 200, 8, 40, 40);
+                    }
+
+                    if (vidas  == 2) {
+                        ctx.drawImage(aveVidas, 20, 34, 164, 184, 150, 7, 40, 40);
+                        ctx.drawImage(aveVidas,  20, 34, 164, 204, 200, 8, 40, 40);
+                    }
+
+                    if (vidas  == 1) {
+                        ctx.drawImage(aveVidas, 20, 34, 164, 204, 200, 8, 40, 40);
+                    }
+
+                    if (vidas  == 0) {
+                        playGame = false;
+                    }
+                    
+                    
+                    
+                    //---------------------------------------------------------------------------------------------moneda
+					
+//					if(contador < 300)
+//                    { 
+//				    ctx.drawImage(monedaImg,0,0,112,73,xMoneda,yMoneda,112,73);
+//						tiempo++;
+//                    }
+//					
+//					if(tiempo == 600){
+//						contador=0;
+//						tiempo=0;
+//						xMoneda = Math.random() * canvas.width;
+//                    }
+                    
+                    
+                    
+                   //---------------------------------------------------------------------------------------------caucheras1 
+
+                   //---------------------------------------------------------------------------------------------caucheras2
+                    
+                   ctx.clearRect(0,0,canvas.width, canvas.height);
+                    
+                    ctx.drawImage(Ave1Img,0,frameAve * 90,150,90, xAve, yAve, 150, 90);//ave
+
+                   ctx.drawImage(fondo , 0 , 0 ,4895, 462, xfondo , yfondo ,4895, 462);
+                    
+                    ctx.drawImage(perro,0,0,400,393, xperro, yperro,400,393);
+                    
+                    ctx.drawImage(garra_gato2, 0, 0,149,442, xgarra_gato2, ygarra_gato2, 149,442);
+                      if(ygarra_gato2 + garra_gato2.height < 630){ygarra_gato2 = 400;}//trampa1
+                         
+                    ctx.drawImage(garra_gato3, 0, 0,149,442, xgarra_gato3, ygarra_gato3, 149,442);
+                      if(ygarra_gato3 + garra_gato3.height < 630){ygarra_gato3 = 400;}//trampa1
+           
+                    ctx.drawImage(gato3, 0,0,350,333, xgato3, ygato3, 350,333);
+                    ctx.drawImage(gato2, 0,0,350,333, xgato2, ygato2, 350,333); 
+                    
+                    ctx.drawImage(garra_gato4, 0, 0,149,442, xgarra_gato4, ygarra_gato4, 149,442);
+                      if(ygarra_gato4 + garra_gato4.height < 630){ygarra_gato4 = 400;}//trampa1
+                    
+                    ctx.drawImage(garra_gato5, 0, 0,149,442, xgarra_gato5, ygarra_gato5, 149,442);
+                      if(ygarra_gato5 + garra_gato5.height < 630){ygarra_gato5 = 400;}//trampa1
+                    
+                    ctx.drawImage(fruta, 0, 0,58,89, xfruta, yfruta,58,89);
+                    ctx.drawImage(fruta2, 0, 0,58,89, xfruta2, yfruta2,58,89);
+                    
+//                  ctx.drawImage(cauchera3, 0,framecauchera3*275,220,275, xcauchera3, ycauchera3, 199,205);//cauchera1;
+                    ctx.drawImage(cauchera3, 0,0,154,203, xcauchera3, ycauchera3, 154,203);
+                    ctx.drawImage(cauchera1, 0,0,154,203, xcauchera1, ycauchera1, 154,203);//cauchera2;
+                    ctx.drawImage(cauchera2, 0,0,154,203, xcauchera2, ycauchera2, 154,203);//cauchera3;
+                    
+                    ctx.drawImage(cebo1, 0, 0,246,276, xcebo1, ycebo1, 246,276);//cebo1;
+                    ctx.drawImage(cebo2, 0, 0,246,276, xcebo2, ycebo2, 246,276);//cebo2;
+                    
+                    ctx.drawImage(cebo3, 0, 0,246,276, xcebo3, ycebo3, 246,276);//cebo3;
+                    ctx.drawImage(cebo4, 0, 0,246,276, xcebo4, ycebo4, 246,276);//cebo4;                   
+                    ctx.drawImage(cebo5, 0, 0,246,276, xcebo5, ycebo5, 246,276);//cebo5;
+                    
+                    ctx.drawImage(monedacebo,0,0,110,39,xmonedacebo,ymonedacebo,110,39);//moneda cebo;
+                    ctx.drawImage(monedacebo2,0,0,110,39,xmonedacebo2,ymonedacebo2,110,39);//moneda cebo2;
+                    ctx.drawImage(monedacebo3,0,0,110,39,xmonedacebo3,ymonedacebo3,110,39);//moneda cebo3;
+                    ctx.drawImage(monedacebo4,0,0,110,39,xmonedacebo4,ymonedacebo4,110,39);//moneda cebo4;
+                    ctx.drawImage(monedacebo5,0,0,110,39,xmonedacebo5,ymonedacebo5,110,39);//moneda cebo5;
+                    
+                    ctx.drawImage(monedacauchera,0,0,67,73,xmonedacauchera,ymonedacauchera,67,73);//monedacauchera;1
+                    ctx.drawImage(monedacauchera2,0,0,67,73,xmonedacauchera2,ymonedacauchera2,67,73);//monedacauchera2
+                    ctx.drawImage(monedacauchera3,0,0,67,73,xmonedacauchera3,ymonedacauchera3,67,73);//monedacauchera3;
+                    
+                   
+                    
+                    ctx.drawImage(moneda1,0,0,112,73,xmoneda1,ymoneda1,112,73);
+                    ctx.drawImage(moneda2,0,0,112,73,xmoneda2,ymoneda2,112,73);
+                    ctx.drawImage(moneda3,0,0,112,73,xmoneda3,ymoneda3,112,73);
+                    ctx.drawImage(moneda4,0,0,112,73,xmoneda4,ymoneda4,112,73);
+                    
+                     ctx.drawImage(meta , 0 , 0 , 100 , 100, xmeta , ymeta , 100, 100);//meta
+                     ctx.drawImage(flecha , 0 , 10 , 800 , 1000, xflecha , yflecha , 200, 200);//flecha
+                   
+                    
+//-----------------------------------------------------------------------------------------dibujando las jaulas 
+                      ctx.drawImage(gotaImg3, 0, 0,185,218, xgota3, ygota3, 185,218);
+                      if(ygota3 -gotaImg3.height  > 200){ygota3 = -250;} //gotas1
+                    
+                      ctx.drawImage(gotaImg2, 0, 0,185,218, xgota2, ygota2, 185,218);
+                      if(ygota2 -gotaImg2.height  > 200){ygota2 = -250;} //gotas2
+                    
+                      ctx.drawImage(gotaImg5, 0, 0,185,218, xgota5, ygota5, 185,218);
+                      if(ygota5 -gotaImg5.height  > 200){ygota5 = -250;} //gotas3
+                    
+                      ctx.drawImage(gotaImg, 0, 0,185,218, xgota, ygota, 185,218);
+                      if(ygota -gotaImg.height  > 200){ygota = -250;} //gotas4
+                    
+                      ctx.drawImage(gotaImg6, 0, 0,185,218, xgota6, ygota6, 185,218);
+                      if(ygota6 -gotaImg6.height  > 200){ygota6 = -250;} //gotas5
+                    
+                      ctx.drawImage(gotaImg7, 0, 0,185,218, xgota7, ygota7, 185,218);
+                      if(ygota7 -gotaImg7.height  > 200){ygota7 = -250;} //gotas6
+                    
+                      ctx.drawImage(gotaImg8, 0, 0,185,218, xgota8, ygota8, 185,218);
+                      if(ygota8 -gotaImg8.height  > 200){ygota8 = -250;} //gotas7
+                    
+                      ctx.drawImage(gotaImg9, 0, 0,185,218, xgota9, ygota9, 185,218);
+                      if(ygota9 -gotaImg9.height  > 200){ygota9 = -250;} //gotas8
+                    
+                      ctx.drawImage(gotacebo, 0, 0,185,218, xgotacebo, ygotacebo, 185,218);
+                      ctx.drawImage(gotacebo2, 0, 0,185,218, xgotacebo2, ygotacebo2, 185,218);
+                      ctx.drawImage(gotacebo3, 0, 0,185,218, xgotacebo3, ygotacebo3, 185,218);
+                      ctx.drawImage(gotacebo4, 0, 0,185,218, xgotacebo4, ygotacebo4, 185,218);
+                      ctx.drawImage(gotacebo5, 0, 0,185,218, xgotacebo5, ygotacebo5, 185,218);
+//                   
+                    
+//-----------------------------------------------------------------------------------------dibujando las trampas; 
+                    
+                      ctx.drawImage(trampaImg, 0, 0,149,442, xTrampa, yTrampa,149,442);
+                      if(yTrampa  + trampaImg.height < 630){yTrampa =400;}//trampa1
+                    
+                      ctx.drawImage(trampaImg2, 0, 0,149,442, xTrampa2, yTrampa2,149,442);
+                      if(yTrampa2 + trampaImg2.height  < 630){yTrampa2 =400;} //trampa2
+                    
+                      ctx.drawImage(trampaImg3, 0, 0,149,442, xTrampa3, yTrampa3, 149,442);
+                      if(yTrampa3 + trampaImg3.height  < 630){yTrampa3 =400;} //trampa3
+              
+//-----------------------------------------------------------------------------------------dibujando las rocas  
+                    
+                    ctx.drawImage(piedra7, 0, framePiedra7 * 64,64, 64, xpiedra7, ypiedra7, 50,50); //rocas cauchera1
+                    
+                      if(ypiedra7 + piedra7.width < 10){ypiedra7 = canvas.width;}
+                      if(ypiedra7 + piedra7.width < 10){xpiedra7 = canvas.width;}// roca1
+                    
+                    ctx.drawImage(piedra5, 0, framePiedra5 * 64,64, 64, xpiedra5, ypiedra5, 50,50); //rocas cauchera2 
+                    
+                      if(ypiedra5 + piedra5.width < 10){ypiedra5 = canvas.width;}
+                      if(ypiedra5 + piedra5.width < 10){xpiedra5 = canvas.width;}// roca2
+                    
+                    ctx.drawImage(piedra6, 0, framePiedra6 * 64,64, 64, xpiedra6, ypiedra6, 50,50); //rocas cauchera3
+                    
+                      if(ypiedra6 + piedra6.width < 10){ypiedra6 = canvas.width;}
+                      if(ypiedra6 + piedra6.width < 10){xpiedra6 = canvas.width;}// roca3
+                    
+					    }// a qui termimna mi dibujos;
+            
+                 animation();
+                
+                }
+         
+        </script>
+    </head>
+    <body>
+    <div id="Cont-Piamonte">
+     <canvas id="canvas" width="1200" height="500"></canvas>
+        <div id="fondo" width="1200" height="500"></div>
+        
+
+        
+         <div id="bindex"><a href="../index.html"></a></div>
+         <div id="over">GAME OVER</div>
+         <div id="score">SCORE:</div>
+         <div id="ultimo"></div>
+         <div id="rett">REINICIAR</div>
+         <p class="vidas">VIDAS</p>
+         <ul id="deslineal">
+         <li class="icon-arrow-left2" id="derecha"></li>
+         <li class="icon-arrow-right2" id="izquierda"></li>
+         </ul>
+         <ul id="desvertical">
+         <li class="icon-arrow-up2" id="back"></li>
+         <li class="icon-arrow-down2" id="go"></li>
+         </ul>
+         <div id="ctrlvol">
+<div id="highvl" class="icon-volume-high"></div>
+<div id="mutvl" class="icon-volume-mute"></div>
+</div>
+<div id="amigar-tangara">
+<div id="inf-tangara">
+<br/>
+<br/>
+<h3>
+Tangara rastrojera
+</h3>        
+<h4>
+Clasificación taxonómica
+</h4>
+<h4>
+Reino: Animalia
+</h4>
+<h4>
+Phylum: Chordata
+</h4>
+<h4>
+Clase: Aves
+</h4>
+<h4>
+Orden: Passeriformes
+</h4>
+<h4>
+Familia: Thraupidae
+</h4>
+<h4>
+Nombre Científico: Tangara vitriolina
+</h4>
+<h4>
+Nombres comunes: Tangara rastrojera
+</h4>
+<br/>
+<br/>
+<p>
+<strong>Identificación:</strong> 14 cm. Plumaje opaco. Coronilla rufa; lados de la cabeza negros formando una máscara; resto principalmente verde grisáceo o verde plateado según la luz; partes inferiores más pálidas, blanquecino en abdomen; alas y cola parduscas ampliamente marginadas verde pálido.
+<br/>
+<strong>Voz:</strong> Ziit agudo y zumbante.
+</p>
+<br/>
+<br/>
+<p>
+<strong>Comportamiento:</strong> Solitario o en parejas busca a la manera de los verderones, desde arbustos bajos hasta copas de los árboles, principalmente insectos. Ocasionalmente en árboles o en arbustos con fruta. No con bandadas mixtas ya que estas no son frecuentes en los hábitats abiertos preferidos por esta especie.
+<br/>
+<br/>
+<strong>Reproducción:</strong> Taza abierta, 2 huevos verdoso pálido punteados y manchados de más oscuro.
+<br/>
+<br/>
+<strong>Estatus y Hábitat:</strong> Común en rastrojos de regiones secas o áreas cultivadas, pastizales enmalezados, barbechos y a menudo cerca de viviendas; en zonas más húmedas siguiendo la deforestación.
+<br/>
+<br/>
+<strong>Distribución:</strong> 500-2200 m (una vez a 3000 m). Valles interandinos incli. Medio y alto de Magdalena, Cauca, Dagua, y Patia y S a través de C Nariño. Recientemente en áreas húmedas deforestadas de vertiente Pacífica. Colombia y NW de Ecuador.
+</p>
+<br/>
+<h4>
+CASI ENDÉMICO
+</h4>
+<br/>
+<br/>
+        </div>
+        <div id="continuar-premio">CONTUINAR</div>
+        </div>
+        <div id="premio">
+        <div id="animacion-premio"></div>
+        <div id="img-premio">
+        </div>
+        <p></p>
+        <div id="iramedidor"><a href="../medidor.html">Aplicar</a></div>
+        <div id="volver">
+        <a href="../index.html"></a>
+        </div>
+        </div>
+        <audio id="smusic" src="../sounds/Theme1-Master.wav"></audio>
+        <audio id="iras" src="../sounds/General/Menu_Principal_AbrirMundo.mp3"></audio>
+        <audio id="bicho" src="../sounds/Reinita/Reinita_Mordisco.mp3"></audio> 
+        <audio id="bicho2" src="../sounds/Piamonte/Piamonte_Moneda.mp3"></audio>
+        <audio id="ganaste" src="../sounds/General/Mundos_Ganaste.mp3"></audio> 
+        <audio id="game" src="../sounds/General/Mundos_GameOver.mp3"></audio>
+        <audio id="jaula" src="../sounds/Piamonte/Piamonte_Impacto_Jaula.mp3"></audio>
+        <audio id="gato" src="../sounds/Piamonte/Piamonte_Gato.mp3"></audio>
+        <audio id="gato-impacto" src="../sounds/Piamonte/Piamonte_Impacto_GatoAtaque.mp3"></audio>
+        <audio id="ambiente" src="../sounds/Piamonte/Piamonte_Ambience.mp3"></audio>
+        <audio id="perro" src="../sounds/Piamonte/Piamonte_Perro.mp3"></audio>
+        </div>
+
+    </body>
+</html>
